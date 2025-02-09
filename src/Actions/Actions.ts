@@ -27,3 +27,14 @@ export async function CreateUser({ email, name, password, login }: CreateUserPro
 }
 
  // SZUKANIE PO PROPSIE RZECZY Z FORMA 
+
+ export async function Login({ login, password }: LoginProps){
+    const user = await prisma.user.findFirst({
+        where:{
+            Login: login,
+            password: password
+        }
+    });
+}
+
+
