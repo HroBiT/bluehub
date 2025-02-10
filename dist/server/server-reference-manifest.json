@@ -1,0 +1,39 @@
+{
+  "node": {
+    "40786bc95c84459e67897896b9219938cf68786ce0": {
+      "workers": {
+        "app/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5Cgruca%5C%5Cbluehub%5C%5Csrc%5C%5CActions%5C%5CCartActions.ts%22%2C%5B%5B%2240786bc95c84459e67897896b9219938cf68786ce0%22%2C%22AddToCart%22%5D%2C%5B%2240ac792055f7946e84db0449f47895f3ba496a9a62%22%2C%22GetCartItems%22%5D%2C%5B%226059568e0d3248f021ae4b739e151141d0e0f4f5f9%22%2C%22RemoveFromCart%22%5D%5D%5D%5D&__client_imported__=true!",
+          "async": false
+        }
+      },
+      "layer": {
+        "app/page": "action-browser"
+      }
+    },
+    "40ac792055f7946e84db0449f47895f3ba496a9a62": {
+      "workers": {
+        "app/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5Cgruca%5C%5Cbluehub%5C%5Csrc%5C%5CActions%5C%5CCartActions.ts%22%2C%5B%5B%2240786bc95c84459e67897896b9219938cf68786ce0%22%2C%22AddToCart%22%5D%2C%5B%2240ac792055f7946e84db0449f47895f3ba496a9a62%22%2C%22GetCartItems%22%5D%2C%5B%226059568e0d3248f021ae4b739e151141d0e0f4f5f9%22%2C%22RemoveFromCart%22%5D%5D%5D%5D&__client_imported__=true!",
+          "async": false
+        }
+      },
+      "layer": {
+        "app/page": "action-browser"
+      }
+    },
+    "6059568e0d3248f021ae4b739e151141d0e0f4f5f9": {
+      "workers": {
+        "app/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5Cgruca%5C%5Cbluehub%5C%5Csrc%5C%5CActions%5C%5CCartActions.ts%22%2C%5B%5B%2240786bc95c84459e67897896b9219938cf68786ce0%22%2C%22AddToCart%22%5D%2C%5B%2240ac792055f7946e84db0449f47895f3ba496a9a62%22%2C%22GetCartItems%22%5D%2C%5B%226059568e0d3248f021ae4b739e151141d0e0f4f5f9%22%2C%22RemoveFromCart%22%5D%5D%5D%5D&__client_imported__=true!",
+          "async": false
+        }
+      },
+      "layer": {
+        "app/page": "action-browser"
+      }
+    }
+  },
+  "edge": {},
+  "encryptionKey": "JohahOl+50FHdGuUOa6X0aDbBOMDmsb/PMcxGJx9Yqg="
+}
