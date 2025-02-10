@@ -3,18 +3,21 @@
 
 import { useState } from "react";
 import { CreateUser } from "@/Actions/Actions";
+import { useRouter } from 'next/navigation';
 
 export default function RegisterPage() {
     const [email, setEmail] = useState("");
     const [login, setLogin] = useState("");
     const [name, setName] = useState("");
     const [password, setPassword] = useState("");
+    const router = useRouter();
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
         try {
             await CreateUser({ email, login, name, password });
-            alert("User registered successfully!");
+            router.push("/Pages/Login");
+            
         } catch (error) {
             console.error("Error registering user:", error);
             alert("Failed to register user.");
@@ -22,8 +25,8 @@ export default function RegisterPage() {
     };
 
     return (
-        <div className="mx-auto p-6 bg-white flex justify-center items-center h-screen">
-            <div className="w-1/2 font-bold mb-4 border border-black justify-center p-10 rounded-xl flex flex-col">
+        <div className="mx-auto p-6  flex justify-center items-center h-screen">
+            <div className="w-1/2 font-bold mb-4 bg-white border border-black justify-center p-10 rounded-xl flex flex-col">
                 <h1 className="text-2xl font-bold justify-center">Register Form</h1>
                 <form onSubmit={handleSubmit} className="space-y-4 flex md:flex-col pt-10">
                     <input

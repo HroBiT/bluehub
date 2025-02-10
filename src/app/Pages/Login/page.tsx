@@ -24,7 +24,7 @@ export default function LoginPage() {
     try {
       const user = await Login({ login, password, isAdmin: false });
       alert("User logged in successfully!");
-      setSession({ login: user.login ?? "", name: user.name ?? "", isAdmin: user.isAdmin ?? false });
+      setSession({ UserId: user.userId ,login: user.login ?? "", name: user.name ?? "", isAdmin: user.isAdmin ?? false });
       if (isClient) {
         router.push('/');
       }

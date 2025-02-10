@@ -15,6 +15,12 @@ type LoginProps = {
   isAdmin?: boolean;
 };
 
+type CreateProductProps = {
+  name: string;
+  description: string;
+  price: number;
+};
+
 export async function CreateUser({ email, name, password, login }: CreateUserProps) {
   await prisma.user.create({
     data: {
@@ -38,5 +44,15 @@ export async function Login({ login, password }: LoginProps) {
     throw new Error('Invalid login or password');
   }
 
-  return { login: user.Login, name: user.name, isAdmin: user.isAdmin };
+  return { login: user.Login, name: user.name, isAdmin: user.isAdmin, userId: user.id };
+}
+
+export async function CreateProduct(Products: CreateProductProps) {
+  await prisma.product.create({
+    data: {
+      name: Products.name,
+      description: Products.description,
+      price: Products.price,
+    },
+  });
 }

@@ -3,6 +3,7 @@ type Session = {
   login: string;
   name: string;
   isAdmin: boolean;
+  UserId: number;
 };
 
 export function setSession(session: Session) {

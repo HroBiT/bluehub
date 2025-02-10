@@ -57,8 +57,7 @@ model Product {
   id          Int      @id @default(autoincrement())
   name        String
   description String
-  price       Float
-  sku         String   @unique
+  price       Int
   category    String   @default("Electronics")
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
