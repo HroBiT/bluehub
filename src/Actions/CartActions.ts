@@ -66,13 +66,10 @@ export async function AddToCart({ userId, productId, quantity }: AddToCartParams
   }
 }
 
-export async function RemoveFromCart(userId: number, productId: number): Promise<void> {
-  try {
-    const user = await prisma.user.findUnique({ where: { id: userId } });
-    if (!user) {
-      throw new Error('User not found');
-    }
 
+export async function RemoveFromCart(userId: number, productId: number) {
+  try {
+    console.log("RemoveFromCart called with userId:", userId, "and productId:", productId);
     const product = await prisma.product.findUnique({ where: { id: productId } });
     if (!product) {
       throw new Error('Product not found');
@@ -83,16 +80,14 @@ export async function RemoveFromCart(userId: number, productId: number): Promise
       throw new Error('Cart not found');
     }
 
-    const cartItem = await prisma.cartItem.findFirst({
+    await prisma.cartItem.deleteMany({
       where: {
         cartId: cart.id,
         productId: productId,
       },
     });
 
-    if (cartItem) {
-      await prisma.cartItem.delete({ where: { id: cartItem.id } });
-    }
+    console.log("Product removed successfully from cart");
   } catch (error) {
     console.error("Error removing from cart:", error);
     throw new Error('Failed to remove from cart');
