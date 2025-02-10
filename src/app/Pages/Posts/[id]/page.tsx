@@ -14,6 +14,18 @@ interface Post {
   category: string;
 }
 
+export async function generateStaticParams() {
+  const posts = await prisma.product.findMany({
+    select: {
+      id: true,
+    },
+  });
+
+  return posts.map((post) => ({
+    id: post.id.toString(),
+  }));
+}
+
 export default function PostPage() {
   const router = useRouter();
   const { id } = router.query;
