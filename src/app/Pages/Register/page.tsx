@@ -1,11 +1,11 @@
 "use client";
 
-
 import { useState } from "react";
 import { CreateUser } from "@/Actions/Actions";
 import { useRouter } from 'next/navigation';
+import dynamic from 'next/dynamic';
 
-export default function RegisterPage() {
+const RegisterPage = () => {
     const [email, setEmail] = useState("");
     const [login, setLogin] = useState("");
     const [name, setName] = useState("");
@@ -17,7 +17,6 @@ export default function RegisterPage() {
         try {
             await CreateUser({ email, login, name, password });
             router.push("/Pages/Login");
-            
         } catch (error) {
             console.error("Error registering user:", error);
             alert("Failed to register user.");
@@ -25,7 +24,7 @@ export default function RegisterPage() {
     };
 
     return (
-        <div className="mx-auto p-6  flex justify-center items-center h-screen">
+        <div className="mx-auto p-6 flex justify-center items-center h-screen">
             <div className="w-1/2 font-bold mb-4 bg-white border border-black justify-center p-10 rounded-xl flex flex-col">
                 <h1 className="text-2xl font-bold justify-center">Register Form</h1>
                 <form onSubmit={handleSubmit} className="space-y-4 flex md:flex-col pt-10">
@@ -64,4 +63,6 @@ export default function RegisterPage() {
             </div>
         </div>
     );
-}
+};
+
+export default dynamic(() => Promise.resolve(RegisterPage), { ssr: false });

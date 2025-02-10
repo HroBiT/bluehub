@@ -1,8 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: 'standalone',
   distDir: 'dist',
+  output: 'standalone', // Ensure server-side rendering
 };
 
 export default nextConfig;
