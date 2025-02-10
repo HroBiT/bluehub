@@ -5,8 +5,8 @@ export function getSession() {
   return session ? JSON.parse(session) : null;
 }
 
-export function setSession(sessionData: { login: string }) {
-  Cookies.set('session', JSON.stringify(sessionData), { expires: 1 }); 
+export function setSession(sessionData: { login: string, name: string }) {
+  Cookies.set('session', JSON.stringify(sessionData), { expires: 1 });
 }
 
 export function clearSession() {

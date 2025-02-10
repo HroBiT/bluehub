@@ -19,10 +19,9 @@ export default function LoginPage() {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
-      await Login({ login, password });
-      setSession({
-        login
-      });
+      const user = await Login({ login, password });
+      alert("User logged in successfully!");
+      setSession({ login: user.login ?? "", name: user.name ?? "" });
       if (isClient) {
         router.push('/');
       }
