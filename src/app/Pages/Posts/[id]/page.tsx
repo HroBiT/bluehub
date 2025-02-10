@@ -6,6 +6,15 @@ interface PostPageProps {
   }>;
 }
 
+export async function generateStaticParams() {
+  const posts = await prisma.product.findMany({
+    select: {
+      id: true,
+    },
+  });
+  return posts.map(post => ({ id: post.id.toString() }));
+}
+
 export default async function PostPage({ params }: PostPageProps) {
   const resolvedParams = await params;
   const postId = parseInt(resolvedParams.id, 10);
