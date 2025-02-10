@@ -1,14 +1,21 @@
 import Cookies from 'js-cookie';
 
-export function getSession() {
-  const session = Cookies.get('session');
-  return session ? JSON.parse(session) : null;
+export function setSession(session: { login: string; name: string }) {
+  if (typeof window !== 'undefined') {
+    localStorage.setItem('session', JSON.stringify(session));
+  }
 }
 
-export function setSession(sessionData: { login: string, name: string }) {
-  Cookies.set('session', JSON.stringify(sessionData), { expires: 1 });
+export function getSession() {
+  if (typeof window !== 'undefined') {
+    const session = localStorage.getItem('session');
+    return session ? JSON.parse(session) : null;
+  }
+  return null;
 }
 
 export function clearSession() {
-  Cookies.remove('session');
+  if (typeof window !== 'undefined') {
+    localStorage.removeItem('session');
+  }
 }
