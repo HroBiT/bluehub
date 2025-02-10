@@ -35,7 +35,7 @@ export default function CartPage() {
         {cartItems.length > 0 ? (
           cartItems.map((item) => (
             <div key={item.id} className="p-4 border-b border-gray-200 flex justify-between items-center">
-              <p>{item.product.name} - {item.quantity} x ${item.price.toFixed(2)}</p>
+              <p>{item.product.name} - {item.quantity} x {item.price.toFixed(2)} zl</p>
               <button className="bg-red-700 text-white px-4 py-2 rounded hover:bg-red-800 transition duration-300" onClick={async () => {
               if (session?.UserId) {
                 console.log("Removing item with id:", item.id);
