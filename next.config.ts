@@ -1,7 +1,11 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: 'standalone',
+  output: 'export',
+  basePath: '/Pages',
+  images: {
+    unoptimized: true,
+  },
 };
 
 export default nextConfig;
