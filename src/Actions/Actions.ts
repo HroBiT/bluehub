@@ -12,6 +12,7 @@ type CreateUserProps = {
 type LoginProps = {
   login: string;
   password: string;
+  isAdmin?: boolean;
 };
 
 export async function CreateUser({ email, name, password, login }: CreateUserProps) {
@@ -37,5 +38,5 @@ export async function Login({ login, password }: LoginProps) {
     throw new Error('Invalid login or password');
   }
 
-  return { login: user.Login, name: user.name };
+  return { login: user.Login, name: user.name, isAdmin: user.isAdmin };
 }

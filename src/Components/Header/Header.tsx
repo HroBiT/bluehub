@@ -7,13 +7,14 @@ export function Header() {
   interface Session {
     login: string;
     name: string;
+    isAdmin: boolean;
   }
 
   const [session, setSession] = useState<Session | null>(null);
 
   useEffect(() => {
     const sessionData = getSession();
-    console.log("Session data:", sessionData); // Debugging log
+    console.log("Session data:", sessionData);
     setSession(sessionData);
   }, []);
 
@@ -28,6 +29,11 @@ export function Header() {
       {session ? (
         <div className="flex items-center space-x-4"> 
           <p>Welcome, {session.name}!</p> 
+          {session.isAdmin && (
+            <Link href="/AdminPanel">
+              <p className="px-4 py-2 bg-yellow-600 text-white rounded hover:bg-yellow-700 transition">Admin Panel</p>
+            </Link>
+          )}
           <button 
             className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition"
             onClick={handleLogout}

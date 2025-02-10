@@ -10,6 +10,7 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isClient, setIsClient] = useState(false);
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -18,16 +19,20 @@ export default function LoginPage() {
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+    setLoading(true);
+    setError("");
     try {
-      const user = await Login({ login, password });
+      const user = await Login({ login, password, isAdmin: false });
       alert("User logged in successfully!");
-      setSession({ login: user.login ?? "", name: user.name ?? "" });
+      setSession({ login: user.login ?? "", name: user.name ?? "", isAdmin: user.isAdmin ?? false });
       if (isClient) {
         router.push('/');
       }
     } catch (error) {
       console.error("Error logging in:", error);
-      setError("Failed to log in.");
+      setError("Failed to log in. Please check your login credentials and try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -42,6 +47,7 @@ export default function LoginPage() {
           onChange={(e) => setLogin(e.target.value)}
           placeholder="Login"
           className="w-full p-2 border border-gray-300 rounded"
+          aria-label="Login"
         />
         <input
           type="password"
@@ -49,12 +55,14 @@ export default function LoginPage() {
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Hasło"
           className="w-full p-2 border border-gray-300 rounded"
+          aria-label="Hasło"
         />
         <button
           type="submit"
           className="w-full p-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+          disabled={loading}
         >
-          Zaloguj się
+          {loading ? "Logging in..." : "Zaloguj się"}
         </button>
       </form>
     </div>

@@ -56,7 +56,7 @@ model CartItem {
 model Product {
   id          Int      @id @default(autoincrement())
   name        String
-  description String?
+  description String
   price       Float
   sku         String   @unique
   category    String   @default("Electronics")
