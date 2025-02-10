@@ -1,4 +1,3 @@
-"use client";
 
 import { prisma } from "@/lib/db";
 import { useRouter } from 'next/router';
