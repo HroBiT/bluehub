@@ -5,7 +5,7 @@ import { GetCartItems, RemoveFromCart } from "@/Actions/CartActions";
 import { useEffect, useState } from "react";
 import { CartItem, Session } from "@/types/types";
 
-export default function Cart() {
+export default function CartPage() {
   const [session, setSession] = useState<Session | null>(null);
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [totalPrice, setTotalPrice] = useState<number>(0);

@@ -30,7 +30,7 @@ export function Card({ title, description, id, price }: CardProps) {
   };
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md m-4">
+    <div className="bg-white p-6 rounded-lg shadow-md m-4 hover:shadow-lg transition-shadow duration-300 w-[200px]">
       <h1 className="text-2xl font-semibold text-gray-800 mb-2">{title}</h1>
       <p className="text-gray-600 mb-4">{description}</p>
       <p className="text-lg font-bold text-gray-800 mb-4">{price ? `${price.toFixed(2)} zł` : "Price not available"}</p>

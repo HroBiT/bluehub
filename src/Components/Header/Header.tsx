@@ -30,7 +30,7 @@ export function Header() {
         <div className="flex items-center space-x-4 mr-10"> 
           <p>Welcome, {session.name}!</p> 
           {session.isAdmin && (
-            <Link href="/AdminPanel">
+            <Link href="/Admin">
               <p className="px-4 py-2 bg-yellow-600 text-white rounded hover:bg-yellow-700 transition">Admin Panel</p>
             </Link>
           )}

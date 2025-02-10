@@ -15,11 +15,6 @@ type LoginProps = {
   isAdmin?: boolean;
 };
 
-type CreateProductProps = {
-  name: string;
-  description: string;
-  price: number;
-};
 
 export async function CreateUser({ email, name, password, login }: CreateUserProps) {
   await prisma.user.create({
@@ -47,12 +42,18 @@ export async function Login({ login, password }: LoginProps) {
   return { login: user.Login, name: user.name, isAdmin: user.isAdmin, userId: user.id };
 }
 
-export async function CreateProduct(Products: CreateProductProps) {
-  await prisma.product.create({
-    data: {
-      name: Products.name,
-      description: Products.description,
-      price: Products.price,
-    },
+export async function addProduct(name: string, description: string, price: number) {
+  const addedProduct = await prisma.product.create({
+      data: {
+          name,
+          description,
+          price,
+      },
   });
+  return addedProduct;
+}
+
+export async function getProducts() {
+  const products = await prisma.product.findMany();
+  return products;
 }
