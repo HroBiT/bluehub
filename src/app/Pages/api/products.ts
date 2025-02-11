@@ -6,7 +6,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     try {
       const products = await prisma.product.findMany();
       res.status(200).json(products);
-    } catch (error) {
+    } catch {
       res.status(500).json({ error: 'Failed to fetch products' });
     }
   } else if (req.method === 'POST') {
@@ -20,7 +20,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         },
       });
       res.status(201).json(addedProduct);
-    } catch (error) {
+    } catch{
       res.status(500).json({ error: 'Failed to add product' });
     }
   } else {
