@@ -20,7 +20,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         },
       });
       res.status(201).json(addedProduct);
-    } catch{
+    } catch {
       res.status(500).json({ error: 'Failed to add product' });
     }
   } else {
