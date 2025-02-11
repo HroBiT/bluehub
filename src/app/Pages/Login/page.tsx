@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Login } from "@/Actions/Actions";
 import { useRouter } from 'next/navigation';
 import { setSession } from '@/Actions/Session';
 
@@ -22,9 +21,21 @@ export default function LoginPage() {
     setLoading(true);
     setError("");
     try {
-      const user = await Login({ login, password, isAdmin: false });
+      const response = await fetch('/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ login, password }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Invalid login or password');
+      }
+
+      const user = await response.json();
       alert("User logged in successfully!");
-      setSession({ UserId: user.userId ,login: user.login ?? "", name: user.name ?? "", isAdmin: user.isAdmin ?? false });
+      setSession({ UserId: user.userId, login: user.login ?? "", name: user.name ?? "", isAdmin: user.isAdmin ?? false });
       if (isClient) {
         router.push('/');
       }
