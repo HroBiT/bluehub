@@ -1,46 +1,49 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Login } from "@/Actions/Actions";
-import { useRouter } from 'next/navigation';
-import { setSession } from '@/Actions/Session';
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [isClient, setIsClient] = useState(false);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-
-  const handleSubmit = async (event: React.FormEvent) => {
+  async function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
     setLoading(true);
-    setError("");
+    setError(""); // Resetujemy błąd przed próbą logowania
+
     try {
-      const user = await Login({ login, password, isAdmin: false });
-      alert("User logged in successfully!");
-      setSession({ UserId: user.userId ,login: user.login ?? "", name: user.name ?? "", isAdmin: user.isAdmin ?? false });
-      if (isClient) {
-        router.push('/');
+      const response = await fetch("/api/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ login, password }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        setError(data.error || "Błąd logowania");
+        return;
       }
-    } catch (error) {
-      console.error("Error logging in:", error);
-      setError("Failed to log in. Please check your login credentials and try again.");
+
+      console.log("Zalogowano:", data);
+
+      router.push("/");
+    } catch (err) {
+      setError("Wystąpił błąd. Spróbuj ponownie.");
     } finally {
       setLoading(false);
     }
-  };
+  }
 
   return (
-    <div className="max-w-md just align-middle mx-auto p-6 bg-white shadow-md rounded-lg">
+    <div className="max-w-md mx-auto p-6 bg-white shadow-md rounded-lg">
       <h1 className="text-3xl font-bold mb-4 text-center">Strona logowania</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
-        {error && <p className="text-red-500">{error}</p>}
+        {error && <p className="text-red-500 text-center">{error}</p>}
         <input
           type="text"
           value={login}
@@ -62,7 +65,7 @@ export default function LoginPage() {
           className="w-full p-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
           disabled={loading}
         >
-          {loading ? "Logging in..." : "Zaloguj się"}
+          {loading ? "Logowanie..." : "Zaloguj się"}
         </button>
       </form>
     </div>
