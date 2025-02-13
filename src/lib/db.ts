@@ -1,12 +1,20 @@
 import { PrismaClient } from "@prisma/client";
 
-declare global {
-  var prisma: PrismaClient | undefined;
+const globalForPrisma = global as unknown as { prisma: PrismaClient };
+
+let prisma: PrismaClient;
+
+if (typeof window === "undefined") {
+  if (process.env.NODE_ENV === "production") {
+    prisma = new PrismaClient();
+  } else {
+    if (!globalForPrisma.prisma) {
+      globalForPrisma.prisma = new PrismaClient();
+    }
+    prisma = globalForPrisma.prisma;
+  }
+} else {
+  throw new Error("PrismaClient is unable to run in the browser.");
 }
 
-
-const prisma = global.prisma || new PrismaClient();
-
-if (process.env.NODE_ENV !== "production") global.prisma = prisma;
-
-export default prisma;
+export { prisma };
