@@ -1,6 +1,9 @@
-"use server";
+<<<<<<< HEAD
 
+import prisma from '../lib/db';
+=======
 import { prisma } from "@/lib/db";
+>>>>>>> 65898da838e4c6c9417c1e0aef32b6ab1833c9d2
 
 type CreateUserProps = {
   email: string;
@@ -14,7 +17,6 @@ type LoginProps = {
   password: string;
   isAdmin?: boolean;
 };
-
 
 export async function CreateUser({ email, name, password, login }: CreateUserProps) {
   await prisma.user.create({
@@ -40,20 +42,4 @@ export async function Login({ login, password }: LoginProps) {
   }
 
   return { login: user.Login, name: user.name, isAdmin: user.isAdmin, userId: user.id };
-}
-
-export async function addProduct(name: string, description: string, price: number) {
-  const addedProduct = await prisma.product.create({
-      data: {
-          name,
-          description,
-          price,
-      },
-  });
-  return addedProduct;
-}
-
-export async function getProducts() {
-  const products = await prisma.product.findMany();
-  return products;
 }
