@@ -11,6 +11,7 @@ export function generateStaticParams() {
 }
 
 
+
 export default async function PostPage({ params }: PostPageProps) {
   const resolvedParams = await params;
   const postId = parseInt(resolvedParams.id, 10);
