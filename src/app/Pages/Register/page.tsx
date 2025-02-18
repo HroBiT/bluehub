@@ -1,7 +1,7 @@
+// filepath: /c:/Users/gruca/bluehub/src/app/Pages/Register/page.tsx
 "use client";
 
 import { useState } from "react";
-import { CreateUser } from "@/Actions/Actions";
 import { useRouter } from 'next/navigation';
 import dynamic from 'next/dynamic';
 
@@ -15,7 +15,22 @@ const RegisterPage = () => {
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
         try {
-            await CreateUser({ email, login, name, password });
+            const response = await fetch('/api/createUser', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email, login, name, password }),
+            });
+
+            if (!response.ok) {
+                const errorData = await response.text();
+                console.error('Error response:', errorData);
+                throw new Error('Failed to register user');
+            }
+
+            const userData = await response.json();
+            console.log('User registered successfully:', userData);
             router.push("/Pages/Login");
         } catch (error) {
             console.error("Error registering user:", error);
