@@ -1,94 +1,79 @@
-*Dokumentacja Projektu BlueHub *
+**Dokumentacja Projektu BlueHub**
 
-Przegląd Projektu 
+---
 
-BlueHub to platforma e-commerce zbudowana przy użyciu Next.js, React i Prisma. Umożliwia użytkownikom przeglądanie produktów, dodawanie ich do koszyka oraz finalizowanie zamówienia. Dodatkowo zawiera panel administracyjny do zarządzania produktami. 
+## Przegląd Projektu
 
-Funkcjonalności 
+**BlueHub** to platforma e-commerce zbudowana przy użyciu **Next.js**, **React** i **Prisma**. Umożliwia użytkownikom przeglądanie produktów, dodawanie ich do koszyka oraz finalizowanie zamówienia. Dodatkowo zawiera **panel administracyjny** do zarządzania produktami.
 
-Autoryzacja Użytkowników 
+---
 
-Rejestracja: Użytkownicy mogą się rejestrować, podając adres e-mail, login, imię oraz hasło. 
+## Funkcjonalności
 
-Logowanie: Możliwość logowania przy użyciu loginu i hasła. 
+### **Autoryzacja Użytkowników**
 
-Zarządzanie sesją: Sesje użytkowników są zarządzane przy użyciu local storage. 
+- **Rejestracja:** Użytkownicy mogą się rejestrować, podając **adres e-mail**, **login**, **imię** oraz **hasło**.
+- **Logowanie:** Możliwość logowania przy użyciu **loginu** i **hasła**.
+- **Zarządzanie sesją:** Sesje użytkowników są zarządzane przy użyciu **local storage**.
 
-Zarządzanie Produktami 
+### **Zarządzanie Produktami**
 
-Przegląd produktów: Użytkownicy mogą przeglądać listę produktów na stronie głównej. 
+- **Przegląd produktów:** Użytkownicy mogą przeglądać listę produktów na **stronie głównej**.
+- **Szczegóły produktu:** Możliwość zobaczenia **szczegółowych informacji** o produkcie po kliknięciu.
+- **Panel administracyjny:** Administratorzy mogą **dodawać nowe produkty** oraz **przeglądać istniejące**.
 
-Szczegóły produktu: Możliwość zobaczenia szczegółowych informacji o produkcie po kliknięciu. 
+### **Zarządzanie Koszykiem**
 
-Panel administracyjny: Administratorzy mogą dodawać nowe produkty oraz przeglądać istniejące. 
+- **Dodawanie do koszyka:** Użytkownicy mogą **dodawać produkty** do koszyka.
+- **Podgląd koszyka:** Możliwość **przeglądania zawartości koszyka**.
+- **Usuwanie z koszyka:** Użytkownicy mogą **usuwać produkty** z koszyka.
+- **Finalizacja zamówienia:** Możliwość **przejścia do procesu płatności** z poziomu koszyka.
 
-Zarządzanie Koszykiem 
+---
 
-Dodawanie do koszyka: Użytkownicy mogą dodawać produkty do koszyka. 
+## API - Punkty Końcowe
 
-Podgląd koszyka: Możliwość przeglądania zawartości koszyka. 
+### **Endpointy Użytkowników**
 
-Usuwanie z koszyka: Użytkownicy mogą usuwać produkty z koszyka. 
+- `POST /api/createUser` – Tworzy **nowego użytkownika**.
+- `POST /api/login` – Uwierzytelnia użytkownika i zwraca **dane sesji**.
 
-Finalizacja zamówienia: Możliwość przejścia do procesu płatności z poziomu koszyka. 
+### **Endpointy Produktów**
 
-API - Punkty Końcowe 
+- `GET /api/get-products` – Pobiera **listę produktów**.
+- `POST /api/add-to-cart` – Dodaje **produkt do koszyka** użytkownika.
+- `POST /api/remove-from-cart` – Usuwa **produkt z koszyka** użytkownika.
+- `GET /api/get-cart-items` – Pobiera **produkty znajdujące się w koszyku** użytkownika.
 
-Endpointy Użytkowników 
+---
 
-POST /api/createUser – Tworzy nowego użytkownika. 
+## Struktura Plików
 
-POST /api/login – Uwierzytelnia użytkownika i zwraca dane sesji. 
+- `src/app/Pages/api` – Zawiera obsługę **punktów końcowych API**.
+- `src/app/Pages` – Zawiera **komponenty stron** dla różnych tras.
+- `src/Components` – Zawiera **wielokrotnego użytku komponenty UI**.
+- `src/Actions` – Zawiera **funkcje do interakcji z bazą danych**.
+- `src/lib` – Zawiera **funkcje pomocnicze i konfiguracje**.
+- `prisma` – Zawiera **schemat Prisma** i **pliki migracji**.
+- `public` – Zawiera **statyczne zasoby**.
 
-Endpointy Produktów 
+---
 
-GET /api/get-products – Pobiera listę produktów. 
+## Schemat Bazy Danych
 
-POST /api/add-to-cart – Dodaje produkt do koszyka użytkownika. 
+Schemat bazy danych jest definiowany przy użyciu **Prisma** i zawiera następujące modele:
 
-POST /api/remove-from-cart – Usuwa produkt z koszyka użytkownika. 
+- **User** – Reprezentuje **użytkownika** w systemie.
+- **Cart** – Reprezentuje **koszyk użytkownika**.
+- **CartItem** – Reprezentuje **produkt w koszyku** użytkownika.
+- **Product** – Reprezentuje **produkt dostępny do zakupu**.
 
-GET /api/get-cart-items – Pobiera produkty znajdujące się w koszyku użytkownika. 
+---
 
-Struktura Plików 
+## Pierwsze Kroki
 
-src/app/Pages/api – Zawiera obsługę punktów końcowych API. 
+Aby uruchomić serwer deweloperski:
 
-src/app/Pages – Zawiera komponenty stron dla różnych tras. 
-
-src/Components – Zawiera wielokrotnego użytku komponenty UI. 
-
-src/Actions – Zawiera funkcje do interakcji z bazą danych. 
-
-src/lib – Zawiera funkcje pomocnicze i konfiguracje. 
-
-prisma – Zawiera schemat Prisma i pliki migracji. 
-
-public – Zawiera statyczne zasoby. 
-
-Schemat Bazy Danych 
-
-Schemat bazy danych jest definiowany przy użyciu Prisma i zawiera następujące modele: 
-
-User – Reprezentuje użytkownika w systemie. 
-
-Cart – Reprezentuje koszyk użytkownika. 
-
-CartItem – Reprezentuje produkt w koszyku użytkownika. 
-
-Product – Reprezentuje produkt dostępny do zakupu. 
-
-Pierwsze Kroki 
-
-Aby uruchomić serwer deweloperski: 
-
-npm install 
-npm run dev 
-
-Otwórz przeglądarkę i przejdź do http://localhost:3000, aby zobaczyć działającą aplikację. 
-
-Wdrożenie 
-
-Najłatwiejszym sposobem wdrożenia aplikacji Next.js jest skorzystanie z platformy Vercel, stworzonej przez twórców Next.js. Szczegóły znajdziesz w oficjalnej dokumentacji wdrożenia Next.js. 
-
- 
+```bash
+npm install
+npm run dev
