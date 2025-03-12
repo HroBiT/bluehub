@@ -1,4 +1,4 @@
-Dokumentacja Projektu BlueHub 
+*Dokumentacja Projektu BlueHub *
 
 Przegląd Projektu 
 
