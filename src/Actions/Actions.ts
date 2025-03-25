@@ -1,9 +1,6 @@
-<<<<<<< HEAD
 
-import prisma from '../lib/db';
-=======
 import { prisma } from "@/lib/db";
->>>>>>> 65898da838e4c6c9417c1e0aef32b6ab1833c9d2
+
 
 type CreateUserProps = {
   email: string;

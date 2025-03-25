@@ -1,5 +1,5 @@
 import Card from "@/Components/Card/Card";
-import prisma from "@/lib/db";
+import { prisma } from "@/lib/db";
 
 interface Product {
   id: number;

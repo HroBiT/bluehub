@@ -20,11 +20,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         },
       });
       res.status(201).json(addedProduct);
-<<<<<<< HEAD
-    } catch {
-=======
+
     } catch (error) {
->>>>>>> parent of ac4a7b4 (Update products.ts)
       res.status(500).json({ error: 'Failed to add product' });
     }
   } else {
