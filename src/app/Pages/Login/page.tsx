@@ -1,5 +1,4 @@
 "use client";
-//:) 
 
 import { useState } from "react";
 import { Login } from "@/Actions/Actions";
@@ -23,9 +22,8 @@ export default function LoginPage() {
       const user = await Login({ login, password, isAdmin: false });
       alert("User logged in successfully!");
       setSession({ UserId: user.userId ,login: user.login ?? "", name: user.name ?? "", isAdmin: user.isAdmin ?? false });
-      if (typeof window !== "undefined") {
-        router.push('/');
-      }
+      router.push('/');
+
     } catch (error) {
       console.error("Error logging in:", error);
       setError("Failed to log in. Please check your login credentials and try again.");

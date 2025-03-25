@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import  prisma  from "@/lib/db"; // Zmieniono na named import
+import  prisma  from "@/lib/db";
 export async function POST(req: Request) {
   try {
     const { login, password } = await req.json();
