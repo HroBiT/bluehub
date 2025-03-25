@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 type Product = {
   id: number;
@@ -12,23 +12,15 @@ type Product = {
   updatedAt: Date;
 };
 
+const initialProducts: Product[] = [
+  { id: 1, name: "Product 1", description: "Description 1", price: 100, category: "Category 1", createdAt: new Date(), updatedAt: new Date() },
+  { id: 2, name: "Product 2", description: "Description 2", price: 200, category: "Category 2", createdAt: new Date(), updatedAt: new Date() },
+];
+
 export default function AdminPage() {
   const [newProduct, setNewProduct] = useState({ name: "", description: "", price: "" });
-  const [products, setProducts] = useState<Product[]>([]);
+  const [products, setProducts] = useState<Product[]>(initialProducts);
   const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await fetch('/api/products');
-        const products = await response.json();
-        setProducts(products);
-      } catch (err) {
-        setError("Failed to fetch products: " + err);
-      }
-    };
-    fetchProducts();
-  }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -45,20 +37,18 @@ export default function AdminPage() {
       return;
     }
 
-    try {
-      const response = await fetch('/api/products', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ ...newProduct, price }),
-      });
-      const addedProduct = await response.json();
-      setProducts([...products, addedProduct]);
-      setNewProduct({ name: "", description: "", price: "" });
-    } catch (err) {
-      setError("Failed to add product: " + err);
-    }
+    const addedProduct: Product = {
+      id: products.length + 1,
+      name: newProduct.name,
+      description: newProduct.description,
+      price,
+      category: "New Category",
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    };
+
+    setProducts([...products, addedProduct]);
+    setNewProduct({ name: "", description: "", price: "" });
   };
 
   return (
