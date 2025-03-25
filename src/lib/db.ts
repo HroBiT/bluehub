@@ -17,4 +17,4 @@ if (typeof window === "undefined") {
   throw new Error("PrismaClient is unable to run in the browser.");
 }
 
-export { prisma };
+export default prisma;

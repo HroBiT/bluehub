@@ -1,6 +1,6 @@
 "use server";
 
-import { prisma } from "@/lib/db";
+import prisma  from "@/lib/db";
 
 type AddToCartParams = {
   userId: number;
