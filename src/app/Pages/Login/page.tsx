@@ -1,12 +1,11 @@
 "use client";
+//:) 
 
 import { useState, useEffect } from "react";
-<<<<<<< HEAD
-import { useRouter } from "next/navigation";
-=======
+import { Login } from "@/Actions/Actions";
 import { useRouter } from 'next/navigation';
 import { setSession } from '@/Actions/Session';
->>>>>>> 65898da838e4c6c9417c1e0aef32b6ab1833c9d2
+
 
 export default function LoginPage() {
   const [login, setLogin] = useState("");
@@ -21,44 +20,15 @@ export default function LoginPage() {
     setError(""); // Resetujemy błąd przed próbą logowania
 
     try {
-<<<<<<< HEAD
-      const response = await fetch("/api/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ login, password }),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        setError(data.error || "Błąd logowania");
-        return;
-=======
-      const response = await fetch('/api/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ login, password }),
-      });
-
-      if (!response.ok) {
-        throw new Error('Invalid login or password');
-      }
-
-      const user = await response.json();
+      const user = await Login({ login, password, isAdmin: false });
       alert("User logged in successfully!");
-      setSession({ UserId: user.userId, login: user.login ?? "", name: user.name ?? "", isAdmin: user.isAdmin ?? false });
-      if (isClient) {
+      setSession({ UserId: user.userId ,login: user.login ?? "", name: user.name ?? "", isAdmin: user.isAdmin ?? false });
+      if (typeof window !== "undefined") {
         router.push('/');
->>>>>>> 65898da838e4c6c9417c1e0aef32b6ab1833c9d2
       }
-
-      console.log("Zalogowano:", data);
-
-      router.push("/");
-    } catch (err) {
-      setError("Wystąpił błąd. Spróbuj ponownie.");
+    } catch (error) {
+      console.error("Error logging in:", error);
+      setError("Failed to log in. Please check your login credentials and try again.");
     } finally {
       setLoading(false);
     }
