@@ -1,5 +1,4 @@
 import Card from "@/Components/Card/Card";
-import  prisma  from "@/lib/db";
 
 interface Product {
   id: number;
@@ -8,15 +7,27 @@ interface Product {
   price: number;
 }
 
+// Funkcja do pobierania danych (serwerowa)
+async function fetchProducts(): Promise<Product[]> {
+  // Przykładowe dane produktów (zastąp je wywołaniem zewnętrznego API, jeśli to konieczne)
+  const products: Product[] = [
+    { id: 1, name: "Product 1", description: "Description 1", price: 100 },
+    { id: 2, name: "Product 2", description: "Description 2", price: 200 },
+    { id: 3, name: "Product 3", description: "Description 3", price: 300 },
+  ];
+
+  return products;
+}
+
 export default async function Home() {
-  const Product: Product[] = await prisma.product.findMany();
+  const products = await fetchProducts();
 
   return (
     <div className="flex justify-center items-center min-h-screen p-4 ">
       <div className="p-6 rounded-lg w-full max-w-6xl">
-        {Product && Product.length > 0 ? (
+        {products && products.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 w-full">
-            {Product.map((product: Product) => (
+            {products.map((product: Product) => (
               <Card
                 key={product.id}
                 title={product.name}
