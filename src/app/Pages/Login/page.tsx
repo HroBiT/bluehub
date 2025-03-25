@@ -22,24 +22,22 @@ export default function LoginPage() {
     setLoading(true);
     setError("");
     try {
-      const response = await fetch('/api/login', {
+      const response = await fetch('/api/login', { // Zmieniono ścieżkę na "/api/login"
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ login, password }),
       });
-
+  
       if (!response.ok) {
         throw new Error('Failed to log in');
       }
-
+  
       const user = await response.json();
       alert("User logged in successfully!");
       setSession({ UserId: user.userId, login: user.login ?? "", name: user.name ?? "", isAdmin: user.isAdmin ?? false });
-      if (isClient) {
-        router.push('/');
-      }
+      router.push('/');
     } catch (error) {
       console.error("Error logging in:", error);
       setError("Failed to log in. Please check your login credentials and try again.");
