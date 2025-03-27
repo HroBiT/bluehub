@@ -11,7 +11,7 @@ export default async function PostsPage() {
         {posts.map((post) => {
           return (
             <li key={post.id} className="bg-white shadow-md rounded-lg p-4 hover:bg-gray-100 transition">
-              <Link href={`/Pages/Posts/${post.id}`}  className="text-2xl font-semibold text-blue-600 hover:underline">
+              <Link href={`/Users/Posts/${post.id}`}  className="text-2xl font-semibold text-blue-600 hover:underline">
                   {post.name}
               </Link>
             </li>

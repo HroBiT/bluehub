@@ -34,7 +34,7 @@ export function Card({ title, description, id, price }: CardProps) {
       <h1 className="text-2xl font-semibold text-gray-800 mb-2">{title}</h1>
       <p className="text-gray-600 mb-4">{description}</p>
       <p className="text-lg font-bold text-gray-800 mb-4">{price ? `${price.toFixed(2)} zł` : "Price not available"}</p>
-      <Link href={`/Pages/Posts/${id}`}>
+      <Link href={`/Users/Posts/${id}`}>
         <p className="text-blue-500 hover:underline mb-4 block">Read more about !</p>
       </Link>
       <button

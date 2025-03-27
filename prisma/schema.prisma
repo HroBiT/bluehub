@@ -45,14 +45,27 @@ model CartItem {
   updatedAt DateTime @updatedAt
 }
 
+model Image {
+  id       Int     @id @default(autoincrement())
+  path     String
+  size     Int
+  width    Int
+  height   Int
+  product  Product? 
+}
+
 model Product {
   id          Int      @id @default(autoincrement())
   name        String
   description String
   price       Int
   category    String   @default("Electronics")
+  image       Image    @relation(fields: [imageId], references: [id])
+  imageId     Int @unique
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
   CartItem CartItem[]
 }
+
+

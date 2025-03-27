@@ -57,13 +57,13 @@ export async function GetProducts() {
   return products;
 }
 
-export async function AddProduct({ name, description, price }: { name: string; description: string; price: number }) {
-  const product = await prisma.product.create({
-    data: {
-      name: name,
-      description: description,
-      price: price,
-    },
-  });
-  return product;
-}
+// export async function AddProduct({ name, description, price }: { name: string; description: string; price: number }) {
+//   const product = await prisma.product.create({
+//     data: {
+//       name: name,
+//       description: description,
+//       price: price,
+//     },
+//   });
+//   return product;
+// }

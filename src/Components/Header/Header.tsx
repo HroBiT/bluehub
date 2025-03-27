@@ -34,7 +34,7 @@ export function Header() {
               <p className="px-4 py-2 bg-yellow-600 text-white rounded hover:bg-yellow-700 transition">Admin Panel</p>
             </Link>
           )}
-          <Link href="/Pages/Cart">
+          <Link href="/Users/Cart">
             <p className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">Cart</p>
           </Link>
           <button 
@@ -46,10 +46,10 @@ export function Header() {
         </div>
       ) : (
         <div className="flex items-center space-x-4">
-          <Link href="/Pages/Login">
+          <Link href="/Users/Login">
             <p className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">Log in</p>
           </Link>
-          <Link href="/Pages/Register">
+          <Link href="/Users/Register">
             <p className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition">Register</p>
           </Link>
         </div>

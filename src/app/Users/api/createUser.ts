@@ -1,4 +1,4 @@
-// filepath: /c:/Users/gruca/bluehub/src/pages/api/createUser.ts
+
 import { NextApiRequest, NextApiResponse } from 'next';
 import prisma  from '@/lib/db';
 

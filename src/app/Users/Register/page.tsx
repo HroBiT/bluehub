@@ -16,7 +16,7 @@ export default function RegisterPage() {
         event.preventDefault();
         try {
             await CreateUser({ email, login, name, password });
-            router.push("/Pages/Login");
+            router.push("/Users/Login");
             
         } catch (error) {
             console.error("Error registering user:", error);
