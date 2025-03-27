@@ -1,6 +1,6 @@
 "use server";
 
-import prisma  from "@/lib/db";
+import  prisma  from "@/lib/db";
 
 type AddToCartParams = {
   userId: number;
@@ -66,10 +66,13 @@ export async function AddToCart({ userId, productId, quantity }: AddToCartParams
   }
 }
 
-
-export async function RemoveFromCart(userId: number, productId: number) {
+export async function RemoveFromCart(userId: number, productId: number): Promise<void> {
   try {
-    console.log("RemoveFromCart called with userId:", userId, "and productId:", productId);
+    const user = await prisma.user.findUnique({ where: { id: userId } });
+    if (!user) {
+      throw new Error('User not found');
+    }
+
     const product = await prisma.product.findUnique({ where: { id: productId } });
     if (!product) {
       throw new Error('Product not found');
@@ -80,14 +83,16 @@ export async function RemoveFromCart(userId: number, productId: number) {
       throw new Error('Cart not found');
     }
 
-    await prisma.cartItem.deleteMany({
+    const cartItem = await prisma.cartItem.findFirst({
       where: {
         cartId: cart.id,
         productId: productId,
       },
     });
 
-    console.log("Product removed successfully from cart");
+    if (cartItem) {
+      await prisma.cartItem.delete({ where: { id: cartItem.id } });
+    }
   } catch (error) {
     console.error("Error removing from cart:", error);
     throw new Error('Failed to remove from cart');
