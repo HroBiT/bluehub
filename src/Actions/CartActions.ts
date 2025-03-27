@@ -91,7 +91,7 @@ export async function RemoveFromCart(userId: number, productId: number): Promise
     });
 
     if (cartItem) {
-      await prisma.cartItem.delete({ where: { id: cartItem.id } });
+      await prisma.cartItem.delete({ where: { id: cartItem.id,cartId: cart.id } });
     }
   } catch (error) {
     console.error("Error removing from cart:", error);

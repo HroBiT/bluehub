@@ -3,15 +3,17 @@
 import Link from "next/link";
 import { AddToCart } from "@/Actions/CartActions";
 import { getSession } from "@/Actions/Session";
+import Image from "next/image";
 
 type CardProps = {
   title: string;
   description: string;
   id: number;
   price?: number;
+  image?: string;
 };
 
-export function Card({ title, description, id, price }: CardProps) {
+export function Card({ title, description, id, price, image }: CardProps) {
   const handleAddToCart = async () => {
     const session = await getSession();
     if (!session) {
@@ -30,7 +32,8 @@ export function Card({ title, description, id, price }: CardProps) {
   };
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md m-4 hover:shadow-lg transition-shadow duration-300 w-[200px]">
+    <div className="bg-white   p-6  rounded-lg shadow-md m-4 hover:shadow-lg transition-shadow duration-300 ">
+      <Image src={image || "/fallback-image.jpg"} alt="alt" width={500} height={500} className="rounded-t-lg border border-black mb-6 " />
       <h1 className="text-2xl font-semibold text-gray-800 mb-2">{title}</h1>
       <p className="text-gray-600 mb-4">{description}</p>
       <p className="text-lg font-bold text-gray-800 mb-4">{price ? `${price.toFixed(2)} zł` : "Price not available"}</p>

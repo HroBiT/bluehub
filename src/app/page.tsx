@@ -4,13 +4,21 @@ import prisma from "@/lib/db";
 
 
 export default async function Home() {
-  const products = await prisma.product.findMany();
+  const products = await prisma.product.findMany({
+    select: {
+      id: true,
+      name: true,
+      description: true,
+      price: true,
+      image: true,
+    },
+    })
 
   return (
     <div className="flex justify-center items-center min-h-screen p-4">
       <div className="p-6 rounded-lg w-full max-w-6xl">
         {products && products.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 w-full">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 w-full">
             {products.map((product) => (
               <Card
                 key={product.id}
@@ -18,6 +26,7 @@ export default async function Home() {
                 description={product.description}
                 id={product.id}
                 price={product.price}
+                image={product.image.path}
               />
             ))}
           </div>

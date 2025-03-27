@@ -6,6 +6,9 @@ import sharp from "sharp";
 import { revalidatePath } from "next/cache";
 import prisma from "@/lib/db";
 
+
+
+
 export async function GetProducts() {
   return await prisma.product.findMany({
     include: {
@@ -13,6 +16,18 @@ export async function GetProducts() {
     },
   });
 }
+
+export async function GetSingleProduct({ id }: { id: string }) {
+  return await prisma.product.findUnique({
+    where: {
+      id: parseInt(id, 10),
+    },
+    include: {
+      image: true,
+    },
+  });
+}
+
 
 
 export async function UploadImage(formData: FormData) {

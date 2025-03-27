@@ -18,6 +18,7 @@ export default function CartPage() {
 
       if (sessionData) {
         const items: CartItem[] = await GetCartItems(sessionData.UserId);
+        console.log("Cart items:", items);
         setCartItems(items);
 
         const total = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
@@ -38,7 +39,7 @@ export default function CartPage() {
               <p>{item.product.name} - {item.quantity} x ${item.price.toFixed(2)}</p>
               <button className="bg-red-700 text-white px-4 py-2 rounded hover:bg-red-800 transition duration-300" onClick={async () => {
                 if (session?.UserId) {
-                  await RemoveFromCart(session.UserId, item.id);
+                  await RemoveFromCart(session.UserId, item.productId);
                   const updatedItems = await GetCartItems(session.UserId);
                   setCartItems(updatedItems);
                   const total = updatedItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
