@@ -1,36 +1,79 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+**Dokumentacja Projektu BlueHub**
 
-## Getting Started
+---
 
-First, run the development server:
+## Przegląd Projektu
+
+**BlueHub** to platforma e-commerce zbudowana przy użyciu **Next.js**, **React** i **Prisma**. Umożliwia użytkownikom przeglądanie produktów, dodawanie ich do koszyka oraz finalizowanie zamówienia. Dodatkowo zawiera **panel administracyjny** do zarządzania produktami.
+
+---
+
+## Funkcjonalności
+
+### **Autoryzacja Użytkowników**
+
+- **Rejestracja:** Użytkownicy mogą się rejestrować, podając **adres e-mail**, **login**, **imię** oraz **hasło**.
+- **Logowanie:** Możliwość logowania przy użyciu **loginu** i **hasła**.
+- **Zarządzanie sesją:** Sesje użytkowników są zarządzane przy użyciu **local storage**.
+
+### **Zarządzanie Produktami**
+
+- **Przegląd produktów:** Użytkownicy mogą przeglądać listę produktów na **stronie głównej**.
+- **Szczegóły produktu:** Możliwość zobaczenia **szczegółowych informacji** o produkcie po kliknięciu.
+- **Panel administracyjny:** Administratorzy mogą **dodawać nowe produkty** oraz **przeglądać istniejące**.
+
+### **Zarządzanie Koszykiem**
+
+- **Dodawanie do koszyka:** Użytkownicy mogą **dodawać produkty** do koszyka.
+- **Podgląd koszyka:** Możliwość **przeglądania zawartości koszyka**.
+- **Usuwanie z koszyka:** Użytkownicy mogą **usuwać produkty** z koszyka.
+- **Finalizacja zamówienia:** Możliwość **przejścia do procesu płatności** z poziomu koszyka.
+
+---
+
+## API - Punkty Końcowe
+
+### **Endpointy Użytkowników**
+
+- `POST /api/createUser` – Tworzy **nowego użytkownika**.
+- `POST /api/login` – Uwierzytelnia użytkownika i zwraca **dane sesji**.
+
+### **Endpointy Produktów**
+
+- `GET /api/get-products` – Pobiera **listę produktów**.
+- `POST /api/add-to-cart` – Dodaje **produkt do koszyka** użytkownika.
+- `POST /api/remove-from-cart` – Usuwa **produkt z koszyka** użytkownika.
+- `GET /api/get-cart-items` – Pobiera **produkty znajdujące się w koszyku** użytkownika.
+
+---
+
+## Struktura Plików
+
+- `src/app/Pages/api` – Zawiera obsługę **punktów końcowych API**.
+- `src/app/Pages` – Zawiera **komponenty stron** dla różnych tras.
+- `src/Components` – Zawiera **wielokrotnego użytku komponenty UI**.
+- `src/Actions` – Zawiera **funkcje do interakcji z bazą danych**.
+- `src/lib` – Zawiera **funkcje pomocnicze i konfiguracje**.
+- `prisma` – Zawiera **schemat Prisma** i **pliki migracji**.
+- `public` – Zawiera **statyczne zasoby**.
+
+---
+
+## Schemat Bazy Danych
+
+Schemat bazy danych jest definiowany przy użyciu **Prisma** i zawiera następujące modele:
+
+- **User** – Reprezentuje **użytkownika** w systemie.
+- **Cart** – Reprezentuje **koszyk użytkownika**.
+- **CartItem** – Reprezentuje **produkt w koszyku** użytkownika.
+- **Product** – Reprezentuje **produkt dostępny do zakupu**.
+
+---
+
+## Pierwsze Kroki
+
+Aby uruchomić serwer deweloperski:
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
